@@ -12,7 +12,7 @@ export default class EventsController {
     this.eventsService.createEvent(createEventDto);
   }
 
-  @Get('')
+  @Get(':email')
   async getAllForEmail(@Param('email') email): Promise<Event[]> {
     return this.eventsService.getForEmail(email);
   }
