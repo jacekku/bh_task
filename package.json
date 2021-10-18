@@ -4,7 +4,9 @@
   "scripts": {
     "install:front": "cd front && npm install",
     "install:back": "cd back && npm install",
-    "postinstall": "run-p install:front install:back"
+    "postinstall": "run-p install:front install:back",
+    "start:front:dev": "cd front && npm run dev",
+    "start:back:dev": "cd back && npm run start:dev"
   },
   "devDependencies": {
     "npm-run-all": "^4.0.2"
