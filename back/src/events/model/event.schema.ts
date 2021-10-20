@@ -13,6 +13,8 @@ export class Event {
   email: string;
   @Prop()
   date: Date;
+  @Prop()
+  eventName: string
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);

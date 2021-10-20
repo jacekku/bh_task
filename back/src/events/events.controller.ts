@@ -12,8 +12,13 @@ export default class EventsController {
     await this.eventsService.createEvent(createEventDto);
   }
 
-  @Get(':email')
-  async getAllForEmail(@Param('email') email): Promise<Event[]> {
-    return this.eventsService.getForEmail(email);
+  @Get('/find/:queryString')
+  async getAllForQueryString(@Param('queryString') query): Promise<Event[]> {
+    return await this.eventsService.getForQueryString(query);
+  }
+
+  @Get('/all')
+  async getAll() {
+    return await this.eventsService.getAll();
   }
 }

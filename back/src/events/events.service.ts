@@ -6,6 +6,7 @@ import { Event, EventDocument } from './model/event.schema';
 
 @Injectable()
 export default class EventsService {
+  
   constructor(
     @InjectModel(Event.name) private readonly eventModel: Model<EventDocument>,
   ) {}
@@ -16,8 +17,19 @@ export default class EventsService {
     return createdEvent.save();
   }
 
-  getForEmail(email: any): Promise<Event[]> {
-    return this.eventModel.find({ email }).exec();
+  async getAll() {
+    return await this.eventModel.find()
+  }
+
+  async getForQueryString(queryString: string): Promise<Event[]> {
+    return this.eventModel.find({ 
+      "$or": [
+        {email: queryString},
+        {firstName: queryString},
+        {lastName: queryString},
+        {eventName: queryString}
+      ]
+     }).exec();
   }
 
   private validateEvent(createdEvent: Event) {
