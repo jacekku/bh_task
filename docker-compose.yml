@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  mongodb:
+    image: mongo:latest
+    environment:
+      - MONGODB_DATABASE="task"
+    ports:
+      - 27017:27017
+
+  # front-end:
+  #   image: jacekku/bh_task_front:latest
+  #   environment:
+  #     - BACKEND_URL="http://localhost:3001"
+  #   ports:
+  #     - 3000:80
+
+  back-end:
+    image: jacekku/bh_task_back:latest
+    environment:
+      - MONGO_URL="mongodb://localhost:27017/task"
+    ports:
+      - 3001:3001
+
+networks:
+  internal:
+    name: task_internal_network

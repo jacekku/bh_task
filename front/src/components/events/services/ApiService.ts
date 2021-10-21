@@ -1,9 +1,11 @@
 export default class EventsApiService {
-  static readonly BASE_URL = "http://localhost:3001/events";
+  static readonly BASE_URL = process.env.BACKEND_URL + "/events";
   static readonly GET_URL = this.BASE_URL + "/find/@searchQuery";
   static readonly ALL_URL = this.BASE_URL + "/all";
   static readonly CREATE_URL = this.BASE_URL + "/create";
+
   static async getAll() {
+    console.log(process.env.BACKEND_URL);
     return fetch(EventsApiService.ALL_URL);
   }
 
