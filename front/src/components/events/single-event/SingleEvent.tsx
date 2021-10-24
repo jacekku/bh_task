@@ -8,7 +8,7 @@ type Props = {
   lastName: string;
   email: string;
   date: Date;
-  eventName: string;
+  eventName?: string;
 };
 
 class SingleEvent extends React.Component<Props> {

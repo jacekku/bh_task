@@ -14,7 +14,7 @@ export class Event {
   @Prop()
   date: Date;
   @Prop()
-  eventName: string
+  eventName: string;
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);

@@ -6,7 +6,6 @@ import { Event, EventDocument } from './model/event.schema';
 
 @Injectable()
 export default class EventsService {
-  
   constructor(
     @InjectModel(Event.name) private readonly eventModel: Model<EventDocument>,
   ) {}
@@ -18,45 +17,43 @@ export default class EventsService {
   }
 
   async getAll() {
-    return await this.eventModel.find()
+    return await this.eventModel.find();
   }
 
   async getForQueryString(queryString: string): Promise<Event[]> {
-    return this.eventModel.find({ 
-      "$or": [
-        {email: queryString},
-        {firstName: queryString},
-        {lastName: queryString},
-        {eventName: queryString}
-      ]
-     }).exec();
+    return this.eventModel
+      .find({
+        $or: [
+          { email: queryString },
+          { firstName: queryString },
+          { lastName: queryString },
+          { eventName: queryString },
+        ],
+      })
+      .exec();
   }
 
   private validateEvent(createdEvent: Event) {
-    if (
-      this.validateFirstName(createdEvent) ||
-      this.validateLastName(createdEvent) ||
-      this.validateEmail(createdEvent) ||
-      this.validateDate(createdEvent)
-    ) {
-      throw new BadRequestException('');
-    }
+    this.validateFirstName(createdEvent);
+    this.validateLastName(createdEvent);
+    this.validateEmail(createdEvent);
+    this.validateDate(createdEvent);
   }
 
   private validateFirstName(event: Event) {
     const { firstName } = event;
-    return !firstName;
+    if (!firstName) throw new BadRequestException('firstName not filled');
   }
   private validateLastName(event: Event) {
     const { lastName } = event;
-    return !lastName;
+    if (!lastName) throw new BadRequestException('lastName not filled');
   }
   private validateEmail(event: Event) {
     const { email } = event;
-    return !email;
+    if (!email) throw new BadRequestException('email not filled');
   }
   private validateDate(event: Event) {
     const { date } = event;
-    return !date;
+    if (!date) throw new BadRequestException('date not filled');
   }
 }
