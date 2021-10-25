@@ -57,3 +57,10 @@ npm run start:prod
 cd back
 npm run test
 ```
+
+### Front-end
+
+```
+cd front
+npm run test
+```
